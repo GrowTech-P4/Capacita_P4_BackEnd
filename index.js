@@ -1,11 +1,3 @@
-const express = require('express');
-const server = express();
+const app = require('./src/app');
 
-
-server.get('/',(req,res)=>{
-    console.log("Passando lindo");
-    return res.json({message:"ok"});
-});
-
-
-server.listen(3000);
+app.listen(3000);
