@@ -1,5 +1,6 @@
 const express = require('express');
 const routes = require('./routes/index');
+const usuarioPCDRoute = require('./routes/UsuarioPCDRoute'); 
 require('dotenv').config();
 require('../src/config/connection');
 
@@ -16,6 +17,7 @@ class App {
 
     routes() {
         this.server.use(routes);
+        this.server.use(usuarioPCDRoute);
     }
 }
 

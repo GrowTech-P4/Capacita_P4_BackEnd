@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
 const Instituicao = mongoose.Schema({
-  _id: String,
   nome: String,
   email: String,
   senha: String,
@@ -11,7 +10,7 @@ const Instituicao = mongoose.Schema({
   numero: Number,
   bairro: String,
   cep: Number,
-  curso: {
+  curso: [{
     nome: String,
     descricao: String,
     cargaHoraria: String,
@@ -20,24 +19,14 @@ const Instituicao = mongoose.Schema({
     valor: Number,
     dataConclusao: String,
     img_curso: String,
-    perguntas: {
-      descricao: String,
-      titulo: String,
-      data: String,
-      nomeUsuario: String,
-      respostas: {
-        nomeUsuario: String,
-        data: String,
-        resposta: String
-      }
-    },
-    usuarioPcd: {
-      _id: String,
+    perguntas: [{
+     _id: mongoose.Types.ObjectId(),
+    }],
+    usuarioPcd: [{
+      _id: mongoose.Types.ObjectId(),
       nome: String
-    }
-  }
+    }]
+  }]
+});
 
-
-})
-
-module.exports = mongoose.model('Test', Instituicao);
+module.exports = mongoose.model('Instituicao', Instituicao);

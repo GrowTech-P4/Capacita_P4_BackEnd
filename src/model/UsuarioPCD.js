@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
 const UsuarioPCD = mongoose.Schema({
-  _id: String,
   nome: String,
   email: String,
   senha: String,
@@ -13,8 +12,8 @@ const UsuarioPCD = mongoose.Schema({
   cep: Number,
   link_foto: String,
   bairro: String,
-  tipoDeficiencia: {
+  tipoDeficiencia: [{
     nome: String
-  }
+  }]
 })
-module.exports = mongoose.model('Test', UsuarioPCD);
+module.exports = mongoose.model('UsuarioPCD', UsuarioPCD);
