@@ -9,6 +9,7 @@ class App {
         this.server = express();
         this.middlewares();
         this.routes();
+        this.server.use(express.static('public'))
     }
 
     middlewares() {

@@ -9,6 +9,7 @@ const storeTest = async (req, res) => {
     try {
         const { name, birth } = req.body;
         const body = await Test.create({ name, birth });
+        console.log(req)
         return res.json(body);
     } catch (err) {
         return res.json(err.Message);
