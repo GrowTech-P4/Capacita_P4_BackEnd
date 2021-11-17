@@ -8,6 +8,7 @@ const index = async (req, res) => {
 const storeTest = async (req, res) => {
     try {
         const { name, birth } = req.body;
+        console.log(req)
         const body = await Test.create({ name, birth });
         console.log(req)
         return res.json(body);
