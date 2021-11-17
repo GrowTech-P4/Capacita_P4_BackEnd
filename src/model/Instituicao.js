@@ -20,11 +20,10 @@ const Instituicao = mongoose.Schema({
     dataConclusao: String,
     img_curso: String,
     perguntas: [{
-     _id: mongoose.Types.ObjectId(),
+     type: mongoose.Schema.Types.ObjectId, ref:'Pergunta'
     }],
     usuarioPcd: [{
-      _id: mongoose.Types.ObjectId(),
-      nome: String
+      type: mongoose.Schema.Types.ObjectId, ref:'UsuarioPCD'
     }]
   }]
 });
