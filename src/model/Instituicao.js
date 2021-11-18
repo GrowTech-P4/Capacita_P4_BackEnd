@@ -14,16 +14,18 @@ const Instituicao = mongoose.Schema({
     nome: String,
     descricao: String,
     cargaHoraria: String,
-    tipoDeficiencia: String,
+    tipoDeficiencia: {
+      nome: String
+    },
     duracao: String,
     valor: Number,
     dataConclusao: String,
     img_curso: String,
     perguntas: [{
-     type: mongoose.Schema.Types.ObjectId, ref:'Pergunta'
+      type: mongoose.Schema.Types.ObjectId, ref: 'Pergunta'
     }],
     usuarioPcd: [{
-      type: mongoose.Schema.Types.ObjectId, ref:'UsuarioPCD'
+      type: mongoose.Schema.Types.ObjectId, ref: 'UsuarioPCD'
     }]
   }]
 });
