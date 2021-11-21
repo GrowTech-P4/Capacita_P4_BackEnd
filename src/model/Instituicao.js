@@ -14,9 +14,7 @@ const Instituicao = mongoose.Schema({
     nome: String,
     descricao: String,
     cargaHoraria: String,
-    tipoDeficiencia: {
-      type: mongoose.Schema.Types.ObjectId, ref: 'TipoDeficiencia'
-    },
+    tipoDeficiencia: String,
     duracao: String,
     valor: Number,
     dataConclusao: String,
