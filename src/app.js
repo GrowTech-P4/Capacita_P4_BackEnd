@@ -1,7 +1,7 @@
 const express = require('express');
 const routes = require('./routes/index');
 const usuarioPCDRoute = require('./routes/UsuarioPCDRoute');
-const instituicaoRoute = require('./routes/InstituicaoRoute');  
+const instituicaoRoute = require('./routes/InstituicaoRoute');
 require('dotenv').config();
 require('../src/config/connection');
 
@@ -10,11 +10,11 @@ class App {
         this.server = express();
         this.middlewares();
         this.routes();
-        this.server.use(express.static('public'))
     }
 
     middlewares() {
         this.server.use(express.json());
+        this.server.use(express.static('public'))
     }
 
     routes() {
