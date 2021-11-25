@@ -1,9 +1,15 @@
+const bcrypt =  require('bcryptjs');
 const UsuarioPCD = require('../model/UsuarioPCD');
 
 const store = async (req, res) => {
-    const { nome, email, senha, data_nascimento, telefone, cpf,
-        endereco, numero, cep, link_foto, bairro, tipoDeficiencia } = req.body;
-    const result = await UsuarioPCD.create(req.body);
+    const user = req.body;
+    const userResult = await UsuarioPCD.findOne({email:user.email});
+    if(userResult){
+        return res.status(400).json({message:"E-mail already registered!"})
+    }
+
+    user.senha = await bcrypt.hash(user.senha,8);  
+    const result = await UsuarioPCD.create(user);
     return res.json(result);
 }
 
@@ -28,9 +34,6 @@ const update = async (req,res) => {
     if(!userExists){
         return res.json({message:"User not exist!"});
     }
-
-    const { nome, email, senha, data_nascimento, telefone, cpf,
-        endereco, numero, cep, link_foto, bairro, tipoDeficiencia } = req.body;
 
     await userExists.updateOne(req.body);
 
