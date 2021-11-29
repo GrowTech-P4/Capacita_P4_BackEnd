@@ -1,8 +1,13 @@
-const { Router } = require('express');
-const testController = require('../controller/index');
-const routes = new Router();
+const cursoRoutes = require('./cursoRoute');
+const instituicaoRoutes = require('./InstituicaoRoute');
+const sessionUsuarioPCDRoutes = require('./sessionUsuario');
+const tipoDeficienciaRoutes = require('./TipoDeficienciaRoute');
+const usuarioPCDRoutes = require('./UsuarioPCDRoute');
 
-routes.get('/home', testController.index);
-routes.post('/test', testController.storeTest);
-
-module.exports = routes;
+module.exports = {
+    cursoRoutes,
+    instituicaoRoutes,
+    sessionUsuarioPCDRoutes,
+    tipoDeficienciaRoutes,
+    usuarioPCDRoutes
+}
