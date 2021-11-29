@@ -5,9 +5,8 @@ const store = async (req, res) => {
     return res.json(result);
 }
 
-const index = async (req, res) => {
+const index = async (_, res) => {
     const result = await Instituicao.find();
-    console.log('PASSOU');
     return res.json(result);
 }
 

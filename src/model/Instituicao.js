@@ -11,7 +11,7 @@ const Instituicao = mongoose.Schema({
   bairro: String,
   cep: Number,
   curso: [{
-    type: mongoose.Schema.Types.ObjectId, ref:'Curso'
+    type: mongoose.Schema.Types.ObjectId, ref: 'Curso'
   }]
 });
 

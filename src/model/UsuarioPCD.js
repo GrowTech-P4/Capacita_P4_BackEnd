@@ -13,8 +13,8 @@ const UsuarioPCD = mongoose.Schema({
   link_foto: String,
   bairro: String,
   tipoDeficiencia_ID: [{
-      type: mongoose.Schema.Types.ObjectId,
-      ref:'TipoDeficiencia'
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'TipoDeficiencia'
   }]
 })
 module.exports = mongoose.model('UsuarioPCD', UsuarioPCD);

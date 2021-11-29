@@ -1,11 +1,8 @@
 const express = require('express');
-const routes = require('./routes/index');
-const usuarioPCDRoute = require('./routes/UsuarioPCDRoute');
+const path = require('path');
+const fs = require('fs');
 
-const instituicaoRoute = require('./routes/InstituicaoRoute');  
-const tipoDeficienciaRoute = require('./routes/TipoDeficienciaRoute');
-const cursoRoute = require('./routes/cursoRoute');
-const sessionUsuarioRoute = require('./routes/sessionUsuario');
+const { cursoRoutes, instituicaoRoutes, sessionUsuarioPCDRoutes, tipoDeficienciaRoutes, usuarioPCDRoutes } = require('./routes/index');
 
 require('dotenv').config();
 require('../src/config/connection');
@@ -13,22 +10,32 @@ require('../src/config/connection');
 class App {
     constructor() {
         this.server = express();
+        this.storePath();
         this.middlewares();
         this.routes();
     }
 
     middlewares() {
         this.server.use(express.json());
-        this.server.use(express.static('public'))
+        this.server.use(
+            '/files',
+            express.static(path.resolve(__dirname, '..', 'tmp', 'uploads'))
+        );
     }
 
     routes() {
-        this.server.use(routes);
-        this.server.use(sessionUsuarioRoute);
-        this.server.use(usuarioPCDRoute);
-        this.server.use(instituicaoRoute);
-        this.server.use(cursoRoute);
-        this.server.use(tipoDeficienciaRoute);
+        this.server.use(sessionUsuarioPCDRoutes);
+        this.server.use(usuarioPCDRoutes);
+        this.server.use(instituicaoRoutes);
+        this.server.use(cursoRoutes);
+        this.server.use(tipoDeficienciaRoutes);
+    }
+
+    storePath() {
+        const tmp = path.resolve(__dirname, '..', 'tmp', 'uploads');
+        if (!fs.existsSync(tmp)) {
+            fs.mkdirSync(tmp, { recursive: true });
+        }
     }
 }
 
