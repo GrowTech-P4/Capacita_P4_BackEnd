@@ -34,7 +34,7 @@ const update = async (req, res) => {
 
 const remove = async (req, res) => {
     const { _id } = req.params;
-    const instituicaoExists = await Instituicao.findById(_id);
+    const instituicaoExists = await Instituicao.findOne(_id);
 
     if (!instituicaoExists) {
         return res.json({ message: "instituicao not exist!" });

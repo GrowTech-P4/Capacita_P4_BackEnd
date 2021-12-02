@@ -5,14 +5,17 @@ const { resizeImg } = require('../utils/resizeimg');
 
 const store = async (req, res) => {
     const { _id } = req.params;
-    const instExist = Instituicao.findById(_id);
+    const instExist = await Instituicao.findById(_id);
 
     if (!instExist) {
         return res.status(400).json({ message: "Instituiton not found!" });
     }
 
     const result = await Curso.create(req.body);
-    return res.status(200).json(result);
+    return res.status(200).json({
+        nome: result.nome,
+        descricao: result.descricao
+    });
 }
 
 const index = async (_, res) => {
@@ -68,10 +71,45 @@ const inserAndUpdateFile = async (req, res) => {
     }
 }
 
+const inscriUser = async (req, res) => {
+    try {
+        const { _id } = req.params;
+        const { usuarioPCD } = req.body;
+        const cursoResult = await Curso.findById(_id);
+
+        if (!cursoResult) {
+            return res.status(400).json({ message: "Curso not found!" });
+        }
+
+        if (cursoResult.usuarioPCD.includes(usuarioPCD._id)) {
+            return res.status(400).json({ message: "User already entered!" });
+        }
+
+        cursoResult.usuarioPCD.push(usuarioPCD);
+        cursoResult.save();
+
+        return res.status(200).json("successfully inserted user!");
+    } catch (err) {
+        return res.status(400).json({ message: err.message });
+    }
+}
+
+const remove = async (req, res) => {
+    const { _id } = req.params;
+    const resultCurso = await Curso.findOne({ nome: _id });
+    if (!resultCurso) {
+        return res.status(400).json({ message: "Curso not found!" });
+    }
+    await resultCurso.deleteOne();
+    return res.status(200).json({ message: "Curso deletado com sucesso!" });
+
+}
 module.exports = {
     store,
     index,
     indexById,
     indexCarrossel,
-    inserAndUpdateFile
+    inserAndUpdateFile,
+    inscriUser,
+    remove
 }

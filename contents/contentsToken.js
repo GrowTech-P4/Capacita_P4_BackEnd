@@ -1,0 +1,3 @@
+let token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTllZjE2ZDExNjc5Y2Y4MzYxZWY1NmIiLCJpYXQiOjE2Mzg0MDIzMjUsImV4cCI6MTYzOTAwNzEyNX0.jeNxUnLx43GFFevsNjXiP556SMG5tWg2CNvBRt6dn1M";
+
+module.exports = token;
