@@ -74,20 +74,19 @@ const inserAndUpdateFile = async (req, res) => {
 const inscriUser = async (req, res) => {
     try {
         const { _id } = req.params;
-        const { usuarioPCD } = req.body;
         const cursoResult = await Curso.findById(_id);
-
+        console.log(_id);
         if (!cursoResult) {
             return res.status(400).json({ message: "Curso not found!" });
         }
-
-        if (cursoResult.usuarioPCD.includes(usuarioPCD._id)) {
+        let usuarioPCD = req.usuarioPCD_decoded_id;
+        if (cursoResult.usuarioPCD.includes(usuarioPCD)) {
+            console.log(usuarioPCD)
             return res.status(400).json({ message: "User already entered!" });
         }
 
         cursoResult.usuarioPCD.push(usuarioPCD);
         cursoResult.save();
-
         return res.status(200).json("successfully inserted user!");
     } catch (err) {
         return res.status(400).json({ message: err.message });
