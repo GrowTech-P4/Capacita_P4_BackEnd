@@ -23,7 +23,6 @@ const index = async (_, res) => {
         const result = await Curso.find();
         return res.status(200).json(result);
     } catch (err) {
-        console.log(err);
         return res.status(400).json(err.message);
     }
 }
@@ -74,20 +73,17 @@ const inserAndUpdateFile = async (req, res) => {
 const inscriUser = async (req, res) => {
     try {
         const { _id } = req.params;
-        const { usuarioPCD } = req.body;
+        let usuarioPCD = req.usuarioPCD_decoded_id;
         const cursoResult = await Curso.findById(_id);
-
         if (!cursoResult) {
             return res.status(400).json({ message: "Curso not found!" });
         }
-
-        if (cursoResult.usuarioPCD.includes(usuarioPCD._id)) {
+        if (cursoResult.usuarioPCD.includes(usuarioPCD)) {
             return res.status(400).json({ message: "User already entered!" });
         }
 
         cursoResult.usuarioPCD.push(usuarioPCD);
         cursoResult.save();
-
         return res.status(200).json("successfully inserted user!");
     } catch (err) {
         return res.status(400).json({ message: err.message });
